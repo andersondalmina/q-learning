@@ -15,15 +15,22 @@ set(title: "Q Learning")
 
 update do
   # check frames to run slowly
-  if (get :frames) % 15 == 0
+  if (get :frames) % 15 == 0 && score.finishes.length < 5
     clear
     map.print
 
     action = agent.get_action
     next_state = map.get_next_state(agent.state, action)
-    agent.walk(next_state)
-    agent.print
+    agent.state.update_state_rewards(action, next_state)
 
+    agent.walk(next_state)
+
+    if next_state.reward == 100
+      score.add_finished
+      agent.walk(initial_state)
+    end
+
+    agent.print
     score.print
     score.add_try
   end

@@ -2,8 +2,8 @@ class Agent
   attr_accessor :state
 
   def initialize(state)
-    @actions = %i[up right down left]
     @state = state
+    @epsilon = 0.7
   end
 
   def print
@@ -15,12 +15,10 @@ class Agent
   end
 
   def get_action
-    possible_actions = []
-    possible_actions.replace(@actions)
-    possible_actions.delete(:up) if @state.row.zero?
-    possible_actions.delete(:right) if @state.column == 9
-    possible_actions.delete(:down) if @state.row == 4
-    possible_actions.delete(:left) if @state.column.zero?
-    possible_actions.sample
+    # Select random action
+    return @state.qtable.keys.sample if rand > @epsilon
+
+    # Select based on Q table
+    return @state.qtable.key(@state.qtable.values.max)
   end
 end
