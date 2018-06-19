@@ -15,8 +15,9 @@ set(title: "Q Learning")
 
 update do
   # check frames to run slowly
-  if (get :frames) % 15 == 0 && score.finishes.length < 5
+  if (get :frames) % 2 == 0 && score.finishes.length < 50
     clear
+    map.print_qtable
     map.print
 
     action = agent.get_action

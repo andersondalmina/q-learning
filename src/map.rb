@@ -40,4 +40,12 @@ class Map
       @matrix[current_state.row][current_state.column - 1]
     end
   end
+
+  def print_qtable
+    (0..4).each do |i1|
+      (0..9).each do |i2|
+        p "#{i1} - #{i2} - #{@matrix[i1][i2].qtable}"
+      end
+    end
+  end
 end
