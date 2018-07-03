@@ -17,7 +17,11 @@ class State
   end
 
   def update_state_rewards(action, next_state)
-    max = next_state.qtable.values.max
-    @qtable[action] = @reward + 0.5 * max
+    if next_state.row == 4 && next_state.column == 9
+      @qtable[action] = next_state.reward
+    else
+      max = next_state.qtable.values.max
+      @qtable[action] = @reward + 0.5 * max
+    end
   end
 end
