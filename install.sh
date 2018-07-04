@@ -1,6 +1,3 @@
-# install ruby
-sudo apt-get install ruby-full
-
 # install bundler
 gem install bundler
 
